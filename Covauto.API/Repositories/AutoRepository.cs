@@ -13,7 +13,8 @@ public class AutoRepository(CovautoContext covautoContext)
             returnAutos.Add(new AutoListItem
             {
                 ID = item.ID,
-                Naam = item.Naam
+                Naam = item.Naam,
+                Beschikbaar = item.Beschikbaar
             });
         return returnAutos;
     }
@@ -27,7 +28,8 @@ public class AutoRepository(CovautoContext covautoContext)
         {
             ID = auto.ID,
             Naam = auto.Naam,
-            KilometerStand = auto.KilometerStand
+            KilometerStand = auto.KilometerStand,
+            Beschikbaar = auto.Beschikbaar
         };
         return returnAuto;
     }
