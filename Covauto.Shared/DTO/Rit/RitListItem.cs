@@ -1,7 +1,7 @@
-using Covauto.Application.DTO.Adres;
-using Covauto.Application.DTO.Gebruiker;
+using Covauto.Shared.DTO.Adres;
+using Covauto.Shared.DTO.Gebruiker;
 
-namespace Covauto.Application.DTO.Rit;
+namespace Covauto.Shared.DTO.Rit;
 
 public class RitListItem
 {

@@ -1,4 +1,4 @@
-namespace Covauto.Application.DTO.Gebruiker;
+namespace Covauto.Shared.DTO.Gebruiker;
 
 public class GebruikerItem
 {

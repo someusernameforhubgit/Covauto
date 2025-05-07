@@ -1,13 +1,12 @@
-using Covauto.API.Repositories;
-using Covauto.Application.DTO.Auto;
-using Microsoft.AspNetCore.Http;
+using Covauto.Application.Interfaces;
+using Covauto.Shared.DTO.Auto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Covauto.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutoController(AutoRepository autoRepository) : ControllerBase
+    public class AutoController(IAutoRepository autoRepository) : ControllerBase
     {
         [HttpGet]
         public ActionResult<IEnumerable<AutoListItem>> Get()

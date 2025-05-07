@@ -1,6 +1,6 @@
-using Covauto.Application.DTO.Rit;
+using Covauto.Shared.DTO.Rit;
 
-namespace Covauto.Application.DTO.Auto;
+namespace Covauto.Shared.DTO.Auto;
 
 public class AutoItem
 {
