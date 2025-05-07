@@ -1,4 +1,4 @@
-namespace Covauto.Application.DTO.Adres;
+namespace Covauto.Shared.DTO.Adres;
 
 public class AdresListItem
 {

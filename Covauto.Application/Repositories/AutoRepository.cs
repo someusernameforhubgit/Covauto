@@ -1,14 +1,14 @@
-using Covauto.Application.DTO.Adres;
-using Covauto.Application.DTO.Auto;
-using Covauto.Application.DTO.Gebruiker;
-using Covauto.Application.DTO.Rit;
+using Covauto.Application.Interfaces;
 using Covauto.Domain.Data;
-using Covauto.Domain.Entities;
+using Covauto.Shared.DTO.Adres;
+using Covauto.Shared.DTO.Auto;
+using Covauto.Shared.DTO.Gebruiker;
+using Covauto.Shared.DTO.Rit;
 using Microsoft.EntityFrameworkCore;
 
-namespace Covauto.API.Repositories;
+namespace Covauto.Application.Repositories;
 
-public class AutoRepository(CovautoContext covautoContext)
+public class AutoRepository(CovautoContext covautoContext): IAutoRepository
 {
     public IEnumerable<AutoListItem> GeefAlleAutos()
     {
