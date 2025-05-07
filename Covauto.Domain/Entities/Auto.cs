@@ -6,4 +6,5 @@ public class Auto
     public string Naam { get; set; }
     public int KilometerStand { get; set; }
     public bool Beschikbaar { get; set; }
+    public ICollection<Rit>? Ritten { get; set; }
 }

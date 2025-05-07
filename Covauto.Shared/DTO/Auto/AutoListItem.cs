@@ -1,4 +1,4 @@
-namespace Covauto.Application.DTO.Auto;
+namespace Covauto.Shared.DTO.Auto;
 
 public class AutoListItem
 {
