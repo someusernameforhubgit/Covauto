@@ -16,10 +16,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Covauto.Application\Covauto.Application.csproj" />
       <ProjectReference Include="..\Covauto.Shared\Covauto.Shared.csproj" />
     </ItemGroup>
