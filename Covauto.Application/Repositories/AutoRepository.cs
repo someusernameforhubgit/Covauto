@@ -48,7 +48,6 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
             var newRit = new RitListItem
             {
                 ID = rit.ID,
-                Adressen = [],
                 Gebruiker = new GebruikerListItem
                 {
                     ID = rit.Gebruiker.ID,
@@ -58,22 +57,6 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
                 Kilometers = rit.Kilometers,
                 Datum = rit.Datum,
             };
-            if (rit.Adressen?.Count > 0)
-            {
-                foreach (var adres in rit.Adressen)
-                {
-                    newRit.Adressen.Add(new AdresListItem
-                    {
-                        Huisnummer = adres.Huisnummer,
-                        Order = adres.Order,
-                        ID = adres.ID,
-                        Land = adres.Land,
-                        Plaats = adres.Plaats,
-                        Straat = adres.Straat
-                    });
-                    newRit.Adressen = newRit.Adressen.OrderBy(ad => ad.Order).ToList();
-                }
-            }
             returnAuto.Ritten.Add(newRit);
         }
         returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Datum).ToList();

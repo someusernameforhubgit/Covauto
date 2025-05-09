@@ -6,6 +6,7 @@ namespace Covauto.Domain.Data;
 public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContext(options)
 {
     public DbSet<Auto> Autos { get; set; }
+    public DbSet<Rit> Ritten { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
