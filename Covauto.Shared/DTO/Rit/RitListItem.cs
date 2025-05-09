@@ -6,8 +6,8 @@ namespace Covauto.Shared.DTO.Rit;
 public class RitListItem
 {
     public int ID { get; set; }
-    public AdresListItem Afkomst { get; set; }
+    public List<AdresListItem>? Adressen { get; set; }
     public GebruikerListItem Gebruiker { get; set; }
     public int Kilometers { get; set; }
-    public AdresListItem Bestemming { get; set; }
+    public DateTime Datum { get; set; }
 }
