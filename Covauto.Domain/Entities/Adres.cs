@@ -6,4 +6,5 @@ public class Adres
     public string Plaats { get; set; }
     public string Straat { get; set; }
     public string Huisnummer { get; set; }
+    public string Land { get; set; }
 }

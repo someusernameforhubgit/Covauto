@@ -12,4 +12,5 @@ public class Rit
     public int BestemmingID { get; set; }
     public virtual Auto? Auto { get; set; }
     public int AutoID { get; set; }
+    public DateTime Datum { get; set; }
 }
