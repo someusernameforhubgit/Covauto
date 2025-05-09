@@ -3,6 +3,7 @@ using System;
 using Covauto.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Covauto.Domain.Migrations
 {
     [DbContext(typeof(CovautoContext))]
-    partial class CovautoContextModelSnapshot : ModelSnapshot
+    [Migration("20250509091706_RandomShit")]
+    partial class RandomShit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -176,7 +179,7 @@ namespace Covauto.Domain.Migrations
                         {
                             ID = 1,
                             AutoID = 1,
-                            Datum = new DateTime(2025, 12, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Datum = new DateTime(2025, 5, 9, 11, 17, 5, 764, DateTimeKind.Local).AddTicks(1884),
                             GebruikerID = 1,
                             Kilometers = 1000
                         });

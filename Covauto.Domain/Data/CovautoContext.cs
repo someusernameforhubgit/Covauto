@@ -19,22 +19,6 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
             KilometerStand = 1000,
             Beschikbaar = true
         });
-        modelBuilder.Entity<Adres>().HasData(new Adres
-        {
-            ID = 1, 
-            Plaats = "Doetinchem", 
-            Straat = "J.F. Kennedylaan", 
-            Huisnummer = "49",
-            Land = "Nederland"
-        });
-        modelBuilder.Entity<Adres>().HasData(new Adres
-        {
-            ID = 2,
-            Plaats = "Doetinchem",
-            Straat = "Expiditieweg",
-            Huisnummer = "6A",
-            Land = "Nederland"
-        });
         modelBuilder.Entity<Gebruiker>().HasData(new Gebruiker
         {
             ID = 1,
@@ -45,12 +29,30 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
         modelBuilder.Entity<Rit>().HasData(new Rit
         {
             ID = 1,
-            AfkomstID = 2,
-            BestemmingID = 1,
             AutoID = 1,
             GebruikerID = 1,
             Kilometers = 1000,
-            Datum = DateTime.Now
+            Datum = new DateTime(2025, 12, 5, 12, 00, 00),
+        });
+        modelBuilder.Entity<Adres>().HasData(new Adres
+        {
+            ID = 1,
+            Order = 1,
+            RitID = 1,
+            Plaats = "Doetinchem",
+            Straat = "Expiditieweg",
+            Huisnummer = "6A",
+            Land = "Nederland"
+        });
+        modelBuilder.Entity<Adres>().HasData(new Adres
+        {
+            ID = 2,
+            Order = 2,
+            RitID = 1,
+            Plaats = "Doetinchem", 
+            Straat = "J.F. Kennedylaan", 
+            Huisnummer = "49",
+            Land = "Nederland"
         });
     }
 }

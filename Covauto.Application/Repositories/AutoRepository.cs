@@ -18,7 +18,9 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
             returnAutos.Add(new AutoListItem
             {
                 ID = item.ID,
-                Naam = item.Naam,
+                Merk = item.Merk,
+                Model = item.Model,
+                Kleur = item.Kleur,
                 Beschikbaar = item.Beschikbaar
             });
         return returnAutos;
@@ -27,16 +29,18 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
     public AutoItem GeefAuto(int id)
     {
         var autos = covautoContext.Autos.Select(n => n).Where(n => n.ID == id).Include(n => n.Ritten)
-            .ThenInclude(rit => rit.Afkomst).Include(auto => auto.Ritten).ThenInclude(rit => rit.Bestemming).Include(auto => auto.Ritten).ThenInclude(rit => rit.Gebruiker).ToList();
+            .ThenInclude(rit => rit.Adressen).Include(auto => auto.Ritten).ThenInclude(rit => rit.Gebruiker).ToList();
         if (autos.Count == 0) throw new KeyNotFoundException("Geen auto gevonden bij geven id");
         var auto = autos[0];
         var returnAuto = new AutoItem
         {
             ID = auto.ID,
-            Naam = auto.Naam,
+            Merk = auto.Merk,
+            Model = auto.Model,
+            Kleur = auto.Kleur,
             KilometerStand = auto.KilometerStand,
             Beschikbaar = auto.Beschikbaar,
-            Ritten = new List<RitListItem>()
+            Ritten = []
         };
         if (!(auto.Ritten?.Count > 0)) return returnAuto;
         foreach (var rit in auto.Ritten)
@@ -44,29 +48,35 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
             var newRit = new RitListItem
             {
                 ID = rit.ID,
-                Afkomst = new AdresListItem
-                {
-                    ID = rit.Afkomst.ID,
-                    Plaats = rit.Afkomst.Plaats,
-                    Straat = rit.Afkomst.Straat,
-                    Huisnummer = rit.Afkomst.Huisnummer
-                },
+                Adressen = [],
                 Gebruiker = new GebruikerListItem
                 {
                     ID = rit.Gebruiker.ID,
-                    Naam = rit.Gebruiker.Naam
+                    Voornaam = rit.Gebruiker.Voornaam,
+                    Achternaam = rit.Gebruiker.Achternaam,
                 },
-                Bestemming = new AdresListItem
-                {
-                    ID = rit.Bestemming.ID,
-                    Plaats = rit.Bestemming.Plaats,
-                    Straat = rit.Bestemming.Straat,
-                    Huisnummer = rit.Bestemming.Huisnummer
-                },
-                Kilometers = rit.Kilometers
+                Kilometers = rit.Kilometers,
+                Datum = rit.Datum,
             };
+            if (rit.Adressen?.Count > 0)
+            {
+                foreach (var adres in rit.Adressen)
+                {
+                    newRit.Adressen.Add(new AdresListItem
+                    {
+                        Huisnummer = adres.Huisnummer,
+                        Order = adres.Order,
+                        ID = adres.ID,
+                        Land = adres.Land,
+                        Plaats = adres.Plaats,
+                        Straat = adres.Straat
+                    });
+                    newRit.Adressen = newRit.Adressen.OrderBy(ad => ad.Order).ToList();
+                }
+            }
             returnAuto.Ritten.Add(newRit);
         }
+        returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Datum).ToList();
         return returnAuto;
     }
 }
