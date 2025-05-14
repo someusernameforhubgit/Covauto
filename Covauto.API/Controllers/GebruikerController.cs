@@ -9,11 +9,11 @@ namespace Covauto.API.Controllers
     public class GebruikerController(IGebruikerRepository gebruikerRepository) : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<GebruikerListItem>> Get()
+        public async Task<ActionResult<IEnumerable<GebruikerListItem>>> Get()
         {
             try
             {
-                return Ok(gebruikerRepository.GeefAlleGebruikers());
+                return Ok(await gebruikerRepository.GeefAlleGebruikersAsync());
             }   
             catch (Exception)
             {
@@ -22,11 +22,11 @@ namespace Covauto.API.Controllers
         }
         
         [HttpGet("{id}")]
-        public ActionResult<GebruikerItem> Get(int id)
+        public async Task<ActionResult<GebruikerItem>> Get(int id)
         {
             try
             {
-                return Ok(gebruikerRepository.GeefGebruiker(id));
+                return Ok(await gebruikerRepository.GeefGebruikerAsync(id));
             }
             catch (KeyNotFoundException e)
             {
