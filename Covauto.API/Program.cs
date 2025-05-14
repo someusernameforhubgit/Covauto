@@ -14,6 +14,7 @@ public class Program
         ServicesConfiguration.RegisterServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
         builder.Services.AddScoped<IAutoRepository, AutoRepository>();
         builder.Services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+        builder.Services.AddScoped<IRitRepository, RitRepository>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
