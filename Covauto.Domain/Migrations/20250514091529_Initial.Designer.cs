@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Covauto.Domain.Migrations
 {
     [DbContext(typeof(CovautoContext))]
-    [Migration("20250509091706_RandomShit")]
-    partial class RandomShit
+    [Migration("20250514091529_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,7 +136,7 @@ namespace Covauto.Domain.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Gebruiker");
+                    b.ToTable("Gebruikers");
 
                     b.HasData(
                         new
@@ -172,14 +172,14 @@ namespace Covauto.Domain.Migrations
 
                     b.HasIndex("GebruikerID");
 
-                    b.ToTable("Rit");
+                    b.ToTable("Ritten");
 
                     b.HasData(
                         new
                         {
                             ID = 1,
                             AutoID = 1,
-                            Datum = new DateTime(2025, 5, 9, 11, 17, 5, 764, DateTimeKind.Local).AddTicks(1884),
+                            Datum = new DateTime(2025, 12, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             GebruikerID = 1,
                             Kilometers = 1000
                         });
