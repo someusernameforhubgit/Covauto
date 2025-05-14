@@ -10,11 +10,11 @@ namespace Covauto.API.Controllers
     public class RitController(IRitService ritService) : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<RitListItem>> Get()
+        public async Task<ActionResult<IEnumerable<RitListItem>>> Get()
         {
             try
             {
-                return Ok(ritService.GeefAlleRitten());
+                return Ok(await ritService.GeefAlleRittenAsync());
             }   
             catch (Exception)
             {
@@ -23,11 +23,11 @@ namespace Covauto.API.Controllers
         }
         
         [HttpGet("{id}")]
-        public ActionResult<RitItem> Get(int id)
+        public async Task<ActionResult<RitItem>> Get(int id)
         {
             try
             {
-                return Ok(ritService.GeefRit(id));
+                return Ok(await ritService.GeefRitAsync(id));
             }
             catch (KeyNotFoundException e)
             {

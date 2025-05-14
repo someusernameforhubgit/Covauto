@@ -7,13 +7,13 @@ public class RitService(IRitRepository ritRepository) : IRitService
 {
     private readonly IRitRepository ritRepository = ritRepository;
 
-    public IEnumerable<RitListItem> GeefAlleRitten()
+    public async Task<IEnumerable<RitListItem>> GeefAlleRittenAsync()
     {
-        return ritRepository.GeefAlleRitten();
+        return await ritRepository.GeefAlleRittenAsync();
     }
 
-    public RitItem GeefRit(int id)
+    public async Task<RitItem> GeefRitAsync(int id)
     {
-        return ritRepository.GeefRit(id);
+        return await ritRepository.GeefRitAsync(id);
     }
 }

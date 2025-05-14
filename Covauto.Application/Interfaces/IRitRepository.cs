@@ -5,6 +5,6 @@ namespace Covauto.Application.Interfaces;
 
 public interface IRitRepository
 {
-    public IEnumerable<RitListItem> GeefAlleRitten();
-    public RitItem GeefRit(int id);
+    public Task<IEnumerable<RitListItem>> GeefAlleRittenAsync();
+    public Task<RitItem> GeefRitAsync(int id);
 }

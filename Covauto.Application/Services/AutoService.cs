@@ -5,13 +5,13 @@ namespace Covauto.Application.Services;
 
 public class AutoService(IAutoRepository autoRepository) : IAutoService
 {
-    public IEnumerable<AutoListItem> GeefAlleAutos()
+    public async Task<IEnumerable<AutoListItem>> GeefAlleAutosAsync()
     {
-        return autoRepository.GeefAlleAutos();
+        return await autoRepository.GeefAlleAutosAsync();
     }
 
-    public AutoItem GeefAuto(int id)
+    public async Task<AutoItem> GeefAutoAsync(int id)
     {
-        return autoRepository.GeefAuto(id);
+        return await autoRepository.GeefAutoAsync(id);
     }
 }
