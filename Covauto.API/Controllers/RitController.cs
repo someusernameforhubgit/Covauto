@@ -7,14 +7,14 @@ namespace Covauto.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RitController(IRitRepository ritRepository) : ControllerBase
+    public class RitController(IRitService ritService) : ControllerBase
     {
         [HttpGet]
         public ActionResult<IEnumerable<RitListItem>> Get()
         {
             try
             {
-                return Ok(ritRepository.GeefAlleRitten());
+                return Ok(ritService.GeefAlleRitten());
             }   
             catch (Exception)
             {
@@ -27,7 +27,7 @@ namespace Covauto.API.Controllers
         {
             try
             {
-                return Ok(ritRepository.GeefRit(id));
+                return Ok(ritService.GeefRit(id));
             }
             catch (KeyNotFoundException e)
             {

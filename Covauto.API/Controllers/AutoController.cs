@@ -6,14 +6,14 @@ namespace Covauto.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutoController(IAutoRepository autoRepository) : ControllerBase
+    public class AutoController(IAutoService autoService) : ControllerBase
     {
         [HttpGet]
         public ActionResult<IEnumerable<AutoListItem>> Get()
         {
             try
             {
-                return Ok(autoRepository.GeefAlleAutos());
+                return Ok(autoService.GeefAlleAutos());
             }   
             catch (Exception)
             {
@@ -26,7 +26,7 @@ namespace Covauto.API.Controllers
         {
             try
             {
-                return Ok(autoRepository.GeefAuto(id));
+                return Ok(autoService.GeefAuto(id));
             }
             catch (KeyNotFoundException e)
             {

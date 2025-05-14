@@ -4,6 +4,6 @@ namespace Covauto.Application.Interfaces;
 
 public interface IAutoRepository
 {
-    public IEnumerable<AutoListItem> GeefAlleAutos();
-    public AutoItem GeefAuto(int id);
+    public Task<IEnumerable<AutoListItem>> GeefAlleAutosAsync();
+    public Task<AutoItem> GeefAutoAsync(int id);
 }
