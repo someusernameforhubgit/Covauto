@@ -133,7 +133,7 @@ namespace Covauto.Domain.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Gebruiker");
+                    b.ToTable("Gebruikers");
 
                     b.HasData(
                         new

@@ -18,6 +18,7 @@ public class Program
         builder.Services.AddScoped<IRitService, RitService>();
         
         builder.Services.AddScoped<IAutoRepository, AutoRepository>();
+        builder.Services.AddScoped<IGebruikerRepository, GebruikerRepository>();
         builder.Services.AddScoped<IRitRepository, RitRepository>();
         
         builder.Services.AddControllers();
