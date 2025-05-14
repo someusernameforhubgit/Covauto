@@ -15,6 +15,7 @@ public class Program
         ServicesConfiguration.RegisterServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
         
         builder.Services.AddScoped<IAutoService, AutoService>();
+        builder.Services.AddScoped<IGebruikerService, GebruikerService>();
         builder.Services.AddScoped<IRitService, RitService>();
         
         builder.Services.AddScoped<IAutoRepository, AutoRepository>();
