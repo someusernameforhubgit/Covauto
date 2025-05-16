@@ -7,7 +7,7 @@ namespace Covauto.Application.Repositories;
 
 public class AdresRepository(CovautoContext covautoContext): IAdresRepository
 {
-    public void VoegToe(AdresListItem request)
+    public Adres VoegToe(CreateAdres request)
     {
         var adres = new Adres
         {
@@ -15,10 +15,13 @@ public class AdresRepository(CovautoContext covautoContext): IAdresRepository
             Straat = request.Straat,
             Huisnummer = request.Huisnummer,
             Land = request.Land,
-            Order = request.Order
+            Order = request.Order,
+            RitID = request.RitID
         };
 
         covautoContext.Adressen.Add(adres);
         covautoContext.SaveChanges();
+        
+        return adres;
     }
 }

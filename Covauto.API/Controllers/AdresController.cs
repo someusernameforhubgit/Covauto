@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Covauto.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class AdresController(IAdresRepository adresRepository) : ControllerBase
     {
         [HttpPost]
-        public IActionResult Create([FromBody] AdresListItem request)
+        public IActionResult Create([FromBody] CreateAdres request)
         {
             try
             {
-                adresRepository.VoegToe(request);
-                return StatusCode(StatusCodes.Status201Created);
+                var aangemaakteAuto = adresRepository.VoegToe(request);
+                return Ok(aangemaakteAuto.ID);
             }
             catch (ArgumentException e)
             {

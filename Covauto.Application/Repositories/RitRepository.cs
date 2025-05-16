@@ -54,9 +54,10 @@ public class RitRepository(CovautoContext covautoContext): IRitRepository
         {
             returnRit.Adressen.Add(new AdresListItem
             {
+                ID = adres.ID,
                 Huisnummer = adres.Huisnummer,
                 Order = adres.Order,
-                ID = adres.ID,
+                RitID = adres.RitID,
                 Land = adres.Land,
                 Plaats = adres.Plaats,
                 Straat = adres.Straat
