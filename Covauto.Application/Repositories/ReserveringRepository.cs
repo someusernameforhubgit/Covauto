@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class ReserveringRepository(CovautoContext covautoContext): IReserveringRepository
+public class ReserveringRepository(CovautoContext ctx): AbstractRepository<ReserveringListItem, ReserveringItem>(ctx)
 {
-    public async Task<IEnumerable<ReserveringListItem>> GeefAlleReserveringenAsync()
+    public override async Task<IEnumerable<ReserveringListItem>> GetAllAsync()
     {
-        return await covautoContext.Reserveringen.Select(item => new ReserveringListItem
+        return await Ctx.Reserveringen.Select(item => new ReserveringListItem
         {
             ID = item.ID,
             Auto = new AutoListItem
@@ -20,13 +20,15 @@ public class ReserveringRepository(CovautoContext covautoContext): IReserveringR
                 Kleur = item.Auto.Kleur,
                 Merk = item.Auto.Merk,
                 Model = item.Auto.Model,
-            }
+            },
+            Begin = item.Begin,
+            End = item.End
         }).ToListAsync();
     }
     
-    public async Task<ReserveringItem> GeefReserveringAsync(int id)
+    public override async Task<ReserveringItem> GetByIDAsync(int id)
     {
-        var reservering = await covautoContext.Reserveringen.Include(reservering => reservering.Auto)
+        var reservering = await Ctx.Reserveringen.Include(reservering => reservering.Auto)
             .Include(reservering => reservering.Gebruiker).FirstOrDefaultAsync(g => g.ID == id);
         
         if (reservering == null) return null;

@@ -1,6 +1,5 @@
 using Covauto.Application.Interfaces;
 using Covauto.Domain.Data;
-using Covauto.Shared.DTO.Adres;
 using Covauto.Shared.DTO.Auto;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Rit;
@@ -8,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class AutoRepository(CovautoContext covautoContext): IAutoRepository
+public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListItem, AutoItem>(ctx)
 {
-    public async Task<IEnumerable<AutoListItem>> GeefAlleAutosAsync()
+    public override async Task<IEnumerable<AutoListItem>> GetAllAsync()
     {
-        return await covautoContext.Autos.Select(item => new AutoListItem
+        return await Ctx.Autos.Select(item => new AutoListItem
         {
             ID = item.ID,
             Merk = item.Merk,
@@ -21,9 +20,9 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
         }).ToListAsync();
     }
     
-    public async Task<AutoItem> GeefAutoAsync(int id)
+    public override async Task<AutoItem> GetByIDAsync(int id)
     {
-        var autos = await covautoContext.Autos.Select(n => n).Where(n => n.ID == id).Include(n => n.Ritten)
+        var autos = await Ctx.Autos.Select(n => n).Where(n => n.ID == id).Include(n => n.Ritten)
             .ThenInclude(rit => rit.Adressen).Include(auto => auto.Ritten).ThenInclude(rit => rit.Gebruiker).ToListAsync();
         if (autos.Count == 0) throw new KeyNotFoundException("Geen auto gevonden bij geven id");
         var auto = autos[0];

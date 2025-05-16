@@ -8,14 +8,14 @@ namespace Covauto.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReserveringController(IReserveringService reserveringService) : ControllerBase
+    public class ReserveringController(AbstractService<ReserveringListItem, ReserveringItem> service) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReserveringListItem>>> Get()
         {
             try
             {
-                return Ok(await reserveringService.GeefAlleReserveringenAsync());
+                return Ok(await service.GetAllAsync());
             }   
             catch (Exception)
             {
@@ -28,7 +28,7 @@ namespace Covauto.API.Controllers
         {
             try
             {
-                return Ok(await reserveringService.GeefReserveringAsync(id));
+                return Ok(await service.GetByIDAsync(id));
             }
             catch (KeyNotFoundException e)
             {

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class GebruikerRepository(CovautoContext covautoContext): IGebruikerRepository
+public class GebruikerRepository(CovautoContext ctx): AbstractRepository<GebruikerListItem, GebruikerItem>(ctx)
 {
-    public async Task<IEnumerable<GebruikerListItem>> GeefAlleGebruikersAsync()
+    public override async Task<IEnumerable<GebruikerListItem>> GetAllAsync()
     {
-        return await covautoContext.Gebruikers.Select(item => new GebruikerListItem
+        return await Ctx.Gebruikers.Select(item => new GebruikerListItem
         {
             ID = item.ID,
             Voornaam = item.Voornaam,
@@ -17,9 +17,9 @@ public class GebruikerRepository(CovautoContext covautoContext): IGebruikerRepos
         }).ToListAsync();
     }
     
-    public async Task<GebruikerItem> GeefGebruikerAsync(int id)
+    public override async Task<GebruikerItem> GetByIDAsync(int id)
     {
-        var gebruiker = await covautoContext.Gebruikers.FirstOrDefaultAsync(g => g.ID == id);
+        var gebruiker = await Ctx.Gebruikers.FirstOrDefaultAsync(g => g.ID == id);
         
         if (gebruiker == null) return null;
 
