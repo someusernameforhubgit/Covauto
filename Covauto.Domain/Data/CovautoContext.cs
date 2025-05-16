@@ -7,6 +7,7 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
 {
     public DbSet<Auto> Autos { get; set; }
     public DbSet<Gebruiker> Gebruikers { get; set; }
+    public DbSet<Adres> Adressen { get; set; }
     public DbSet<Rit> Ritten { get; set; }
     public DbSet<Reservering> Reserveringen { get; set; }
 
