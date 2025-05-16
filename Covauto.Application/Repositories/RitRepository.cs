@@ -57,7 +57,6 @@ public class RitRepository(CovautoContext covautoContext): IRitRepository
                 ID = adres.ID,
                 Huisnummer = adres.Huisnummer,
                 Order = adres.Order,
-                RitID = adres.RitID,
                 Land = adres.Land,
                 Plaats = adres.Plaats,
                 Straat = adres.Straat
