@@ -9,6 +9,7 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
     public DbSet<Gebruiker> Gebruikers { get; set; }
     public DbSet<Adres> Adressen { get; set; }
     public DbSet<Rit> Ritten { get; set; }
+    public DbSet<Reservering> Reserveringen { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,8 +20,7 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
             Merk = "Honda",
             Model = "Civic",
             Kleur = "Zwart",
-            KilometerStand = 1000,
-            Beschikbaar = true
+            KilometerStand = 1000
         });
         modelBuilder.Entity<Gebruiker>().HasData(new Gebruiker
         {
@@ -56,6 +56,14 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
             Straat = "J.F. Kennedylaan", 
             Huisnummer = "49",
             Land = "Nederland"
+        });
+        modelBuilder.Entity<Reservering>().HasData(new Reservering
+        {
+            ID = 1,
+            AutoID = 1,
+            GebruikerID = 1,
+            Begin = new DateTime(2025, 12, 6, 12, 00, 00),
+            End = new DateTime(2025, 12, 6, 15, 00, 00)
         });
     }
 }

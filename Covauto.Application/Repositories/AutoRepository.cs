@@ -17,8 +17,7 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
             ID = item.ID,
             Merk = item.Merk,
             Model = item.Model,
-            Kleur = item.Kleur,
-            Beschikbaar = item.Beschikbaar
+            Kleur = item.Kleur
         }).ToListAsync();
     }
     
@@ -35,7 +34,6 @@ public class AutoRepository(CovautoContext covautoContext): IAutoRepository
             Model = auto.Model,
             Kleur = auto.Kleur,
             KilometerStand = auto.KilometerStand,
-            Beschikbaar = auto.Beschikbaar,
             Ritten = []
         };
         if (!(auto.Ritten?.Count > 0)) return returnAuto;

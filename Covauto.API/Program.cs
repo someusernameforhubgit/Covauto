@@ -16,9 +16,11 @@ public class Program
         builder.Services.AddScoped<IAdresRepository, AdresRepository>();
         builder.Services.AddScoped<IAutoService, AutoService>();
         builder.Services.AddScoped<IGebruikerService, GebruikerService>();
+        builder.Services.AddScoped<IReserveringService, ReserveringService>();
         builder.Services.AddScoped<IRitService, RitService>();
         builder.Services.AddScoped<IAutoRepository, AutoRepository>();
         builder.Services.AddScoped<IGebruikerRepository, GebruikerRepository>();
+        builder.Services.AddScoped<IReserveringRepository, ReserveringRepository>();
         builder.Services.AddScoped<IRitRepository, RitRepository>();
         
         builder.Services.AddControllers();
