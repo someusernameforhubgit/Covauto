@@ -55,4 +55,9 @@ public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListIte
         returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Datum).ToList();
         return returnAuto;
     }
+
+    public override async Task<IEnumerable<AutoListItem>> SearchAsync(string query)
+    {
+        return new List<AutoListItem>();
+    }
 }

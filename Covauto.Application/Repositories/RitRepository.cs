@@ -1,6 +1,5 @@
 using Covauto.Application.Interfaces;
 using Covauto.Domain.Data;
-using Covauto.Domain.Entities;
 using Covauto.Shared.DTO.Adres;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Rit;
