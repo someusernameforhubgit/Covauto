@@ -7,6 +7,5 @@ public class Auto
     public string Model { get; set; }
     public string Kleur { get; set; }
     public int KilometerStand { get; set; }
-    public bool Beschikbaar { get; set; }
     public ICollection<Rit>? Ritten { get; set; }
 }

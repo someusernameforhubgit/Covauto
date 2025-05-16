@@ -3,6 +3,7 @@ using System;
 using Covauto.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Covauto.Domain.Migrations
 {
     [DbContext(typeof(CovautoContext))]
-    partial class CovautoContextModelSnapshot : ModelSnapshot
+    [Migration("20250516110809_RemoveBeschrikbaarheid")]
+    partial class RemoveBeschrikbaarheid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -166,16 +169,6 @@ namespace Covauto.Domain.Migrations
                     b.HasIndex("GebruikerID");
 
                     b.ToTable("Reserveringen");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            AutoID = 1,
-                            Begin = new DateTime(2025, 12, 6, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            End = new DateTime(2025, 12, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            GebruikerID = 1
-                        });
                 });
 
             modelBuilder.Entity("Covauto.Domain.Entities.Rit", b =>
