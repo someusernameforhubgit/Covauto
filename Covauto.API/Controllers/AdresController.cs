@@ -1,29 +1,15 @@
+using Covauto.API.Controllers.Interfaces;
 using Covauto.Application.Interfaces;
 using Covauto.Shared.DTO.Adres;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Covauto.API.Controllers
+namespace Covauto.API.Controllers;
+
+public class AdresController(AbstractService<AdresListItem, AdresItem> service) : AbstractController<AdresListItem, AdresItem>(service)
 {
-    [Route("api/[controller]")]
-    [ApiController] 
-    public class AdresController(IAdresRepository adresRepository) : ControllerBase
+    [HttpPost]
+    public async Task<ActionResult<int>> Add(AdresItem item)
     {
-        [HttpPost]
-        public IActionResult Create([FromBody] CreateAdres request)
-        {
-            try
-            {
-                var aangemaakteAuto = adresRepository.VoegToe(request);
-                return Ok(aangemaakteAuto.ID);
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
+        return await _add(item);
     }
 }

@@ -2,6 +2,7 @@ using Covauto.Application.Interfaces;
 using Covauto.Application.Repositories;
 using Covauto.Application.Services;
 using Covauto.Domain;
+using Covauto.Shared.DTO.Adres;
 using Covauto.Shared.DTO.Auto;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Reservering;
@@ -18,7 +19,7 @@ public class Program
         // Add services to the container.
         ServicesConfiguration.RegisterServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
         
-        builder.Services.AddScoped<IAdresRepository, AdresRepository>();
+        builder.Services.AddScoped<AbstractRepository<AdresListItem, AdresItem>, AdresRepository>();
         builder.Services.AddScoped<AbstractService<AutoListItem, AutoItem>, BaseService<AutoListItem, AutoItem>>();
         builder.Services.AddScoped<AbstractService<GebruikerListItem, GebruikerItem>, BaseService<GebruikerListItem, GebruikerItem>>();
         builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem>, BaseService<ReserveringListItem, ReserveringItem>>();

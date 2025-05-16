@@ -1,7 +1,7 @@
 using Covauto.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Covauto.API.Controllers.interfaces;
+namespace Covauto.API.Controllers.Interfaces;
 
 public abstract class AbstractUpdatableController<TListItem, TItem, TUpdatableItem>(AbstractUpdatableService<TListItem, TItem, TUpdatableItem> service) : AbstractController<TListItem, TItem>(service)
 {

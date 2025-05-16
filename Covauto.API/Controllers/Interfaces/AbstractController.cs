@@ -1,16 +1,15 @@
 using Covauto.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Covauto.API.Controllers.interfaces
+namespace Covauto.API.Controllers.Interfaces
 {
     [Route("api/[controller]")]
     [ApiController]
     public abstract class AbstractController<TListItem, TItem>(AbstractService<TListItem, TItem> service) : ControllerBase
     {
-        protected AbstractService<TListItem, TItem> Service = service;
+        private readonly AbstractService<TListItem, TItem> Service = service;
         
-        [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<TListItem>>> Get()
+        protected virtual async Task<ActionResult<IEnumerable<TListItem>>> _get()
         {
             try
             {
@@ -22,8 +21,8 @@ namespace Covauto.API.Controllers.interfaces
             }
         }
         
-        [HttpGet("{id}")]
-        public virtual async Task<ActionResult<TItem>> Get(int id)
+        
+        protected virtual async Task<ActionResult<TItem>> _get(int id)
         {
             try
             {
@@ -56,6 +55,10 @@ namespace Covauto.API.Controllers.interfaces
             try
             {
                 return Ok(await Service.AddAsync(item));
+            }
+            catch (KeyNotFoundException e)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, e.Message);
             }
             catch (Exception)
             {
