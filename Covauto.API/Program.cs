@@ -18,6 +18,7 @@ public class Program
         // Add services to the container.
         ServicesConfiguration.RegisterServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
         
+        builder.Services.AddScoped<IAdresRepository, AdresRepository>();
         builder.Services.AddScoped<AbstractService<AutoListItem, AutoItem>, BaseService<AutoListItem, AutoItem>>();
         builder.Services.AddScoped<AbstractService<GebruikerListItem, GebruikerItem>, BaseService<GebruikerListItem, GebruikerItem>>();
         builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem>, BaseService<ReserveringListItem, ReserveringItem>>();
