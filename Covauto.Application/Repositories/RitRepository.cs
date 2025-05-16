@@ -10,30 +10,25 @@ namespace Covauto.Application.Repositories;
 
 public class RitRepository(CovautoContext covautoContext): IRitRepository
 {
-    public IEnumerable<RitListItem> GeefAlleRitten()
+    public async Task<IEnumerable<RitListItem>> GeefAlleRittenAsync()
     {
-        var returnRitten = new List<RitListItem>();
-        var ritten = covautoContext.Ritten.Select(n => n).Include(n => n.Gebruiker);
-        Console.Out.WriteLine("Test");
-        foreach (var item in ritten)
-            returnRitten.Add(new RitListItem
+        return await covautoContext.Ritten.Select(item => new RitListItem
+        {
+            ID = item.ID,
+            Datum = item.Datum,
+            Gebruiker = new GebruikerListItem
             {
-                ID = item.ID,
-                Datum = item.Datum,
-                Gebruiker = new GebruikerListItem
-                {
-                    ID = item.GebruikerID,
-                    Achternaam = item.Gebruiker.Achternaam,
-                    Voornaam = item.Gebruiker.Voornaam,
-                },
-                Kilometers = item.Kilometers,
-            });
-        return returnRitten;
+                ID = item.GebruikerID,
+                Achternaam = item.Gebruiker.Achternaam,
+                Voornaam = item.Gebruiker.Voornaam,
+            },
+            Kilometers = item.Kilometers,
+        }).ToListAsync();
     }
 
-    public RitItem GeefRit(int id)
+    public async Task<RitItem> GeefRitAsync(int id)
     {
-        var ritten = covautoContext.Ritten.Select(n => n).Where(n => n.ID == id).Include(n => n.Gebruiker).Include(n => n.Adressen).ToList();
+        var ritten = await covautoContext.Ritten.Select(n => n).Where(n => n.ID == id).Include(n => n.Gebruiker).Include(n => n.Adressen).ToListAsync();
         if (ritten.Count == 0) throw new KeyNotFoundException("Geen rit gevonden bij geven id");
         var rit = ritten[0];
         var returnRit = new RitItem
