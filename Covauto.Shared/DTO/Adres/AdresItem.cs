@@ -3,11 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace Covauto.Shared.DTO.Adres;
 
-public class CreateAdres
+public class AdresItem
 {
-    [JsonPropertyName("order")]
-    public int Order { get; set; }
-    
     [Required]
     [JsonPropertyName("plaats")]
     public string Plaats { get; set; }

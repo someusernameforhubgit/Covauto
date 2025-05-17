@@ -6,5 +6,4 @@ public class AutoListItem
     public string Merk { get; set; }
     public string Model { get; set; }
     public string Kleur { get; set; }
-    public bool Beschikbaar { get; set; }
 }

@@ -1,41 +1,22 @@
+using Covauto.API.Controllers.Interfaces;
 using Covauto.Application.Interfaces;
 using Covauto.Shared.DTO.Auto;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Covauto.API.Controllers
+namespace Covauto.API.Controllers;
+
+public class AutoController(AbstractService<AutoListItem, AutoItem> service)
+    : AbstractController<AutoListItem, AutoItem>(service)
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AutoController(IAutoService autoService) : ControllerBase
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AutoListItem>>> Get()
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AutoListItem>>> Get()
-        {
-            try
-            {
-                return Ok(await autoService.GeefAlleAutosAsync());
-            }   
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-        
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AutoItem>> Get(int id)
-        {
-            try
-            {
-                return Ok(await autoService.GeefAutoAsync(id));
-            }
-            catch (KeyNotFoundException e)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, e.Message);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
+        return await _get();
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<AutoItem>> Get(int id)
+    {
+        return await _get(id);
     }
 }

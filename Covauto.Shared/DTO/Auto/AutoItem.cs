@@ -2,13 +2,8 @@ using Covauto.Shared.DTO.Rit;
 
 namespace Covauto.Shared.DTO.Auto;
 
-public class AutoItem
+public class AutoItem : AutoListItem
 {
-    public int ID { get; set; }
-    public string Merk { get; set; }
-    public string Model { get; set; }
-    public string Kleur { get; set; }
     public int KilometerStand { get; set; }
-    public bool Beschikbaar { get; set; }
     public List<RitListItem>? Ritten { get; set; }
 }

@@ -1,6 +1,5 @@
 using Covauto.Application.Interfaces;
 using Covauto.Domain.Data;
-using Covauto.Domain.Entities;
 using Covauto.Shared.DTO.Adres;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Rit;
@@ -8,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class RitRepository(CovautoContext covautoContext): IRitRepository
+public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, RitItem>(ctx)
 {
-    public async Task<IEnumerable<RitListItem>> GeefAlleRittenAsync()
+    public override async Task<IEnumerable<RitListItem>> GetAllAsync()
     {
-        return await covautoContext.Ritten.Select(item => new RitListItem
+        return await Ctx.Ritten.Select(item => new RitListItem
         {
             ID = item.ID,
             Datum = item.Datum,
@@ -26,9 +25,9 @@ public class RitRepository(CovautoContext covautoContext): IRitRepository
         }).ToListAsync();
     }
 
-    public async Task<RitItem> GeefRitAsync(int id)
+    public override async Task<RitItem> GetByIDAsync(int id)
     {
-        var ritten = await covautoContext.Ritten.Select(n => n).Where(n => n.ID == id).Include(n => n.Gebruiker).Include(n => n.Adressen).ToListAsync();
+        var ritten = await Ctx.Ritten.Select(n => n).Where(n => n.ID == id).Include(n => n.Gebruiker).Include(n => n.Adressen).ToListAsync();
         if (ritten.Count == 0) throw new KeyNotFoundException("Geen rit gevonden bij geven id");
         var rit = ritten[0];
         var returnRit = new RitItem
