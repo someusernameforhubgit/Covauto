@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListItem, AutoItem>(ctx)
+public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListItem, AutoItem, object, object>(ctx)
 {
     public override async Task<IEnumerable<AutoListItem>> GetAllAsync()
     {
@@ -41,23 +41,12 @@ public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListIte
             var newRit = new RitListItem
             {
                 ID = rit.ID,
-                Gebruiker = new GebruikerListItem
-                {
-                    ID = rit.Gebruiker.ID,
-                    Voornaam = rit.Gebruiker.Voornaam,
-                    Achternaam = rit.Gebruiker.Achternaam,
-                },
-                Kilometers = rit.Kilometers,
-                Datum = rit.Datum,
+                GebruikerId = rit.GebruikerID,
+                Datum = rit.Datum
             };
             returnAuto.Ritten.Add(newRit);
         }
         returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Datum).ToList();
         return returnAuto;
-    }
-
-    public override async Task<IEnumerable<AutoListItem>> SearchAsync(string query)
-    {
-        return new List<AutoListItem>();
     }
 }

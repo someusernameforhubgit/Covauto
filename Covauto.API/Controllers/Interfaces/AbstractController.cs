@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Covauto.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,9 +6,9 @@ namespace Covauto.API.Controllers.Interfaces
 {
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class AbstractController<TListItem, TItem>(AbstractService<TListItem, TItem> service) : ControllerBase
+    public abstract class AbstractController<TListItem, TItem, TMakeItem, TUpdateItem>(AbstractService<TListItem, TItem, TMakeItem, TUpdateItem> service) : ControllerBase
     {
-        private readonly AbstractService<TListItem, TItem> Service = service;
+        private readonly AbstractService<TListItem, TItem, TMakeItem, TUpdateItem> Service = service;
         
         protected virtual async Task<ActionResult<IEnumerable<TListItem>>> _get()
         {
@@ -50,11 +51,32 @@ namespace Covauto.API.Controllers.Interfaces
             }
         }
         
-        protected async Task<ActionResult<int>> _add(TItem item)
+        protected async Task<ActionResult<int>> _add(TMakeItem item)
         {
             try
             {
                 return Ok(await Service.AddAsync(item));
+            }
+            catch (ValidationException e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, e.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        
+        protected async Task<ActionResult> _update(int id, TUpdateItem item)
+        {
+            try
+            {
+                await service.UpdateAsync(id, item);
+                return Ok();
             }
             catch (KeyNotFoundException e)
             {
@@ -72,6 +94,10 @@ namespace Covauto.API.Controllers.Interfaces
             {
                 await Service.DeleteAsync(id);
                 return Ok();
+            }
+            catch (KeyNotFoundException e)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, e.Message);
             }
             catch (Exception)
             {

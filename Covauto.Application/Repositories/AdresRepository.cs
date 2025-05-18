@@ -6,19 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class AdresRepository(CovautoContext ctx) : AbstractRepository<AdresListItem, AdresItem>(ctx)
+public class AdresRepository(CovautoContext ctx) : AbstractRepository<object, object, AdresMakeItem, object>(ctx)
 {
-    public override Task<IEnumerable<AdresListItem>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Task<AdresItem> GetByIDAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override async Task<int> AddAsync(AdresItem item)
+    public override async Task<int> AddAsync(AdresMakeItem item)
     {
         var rit = Ctx.Ritten.Include(rit => rit.Adressen).FirstOrDefault(r => r.ID == item.RitID);
         if (rit == null) throw new KeyNotFoundException("Geen Rit met dat ID gevonden");
