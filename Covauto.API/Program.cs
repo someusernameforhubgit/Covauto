@@ -7,6 +7,7 @@ using Covauto.Shared.DTO.Auto;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Reservering;
 using Covauto.Shared.DTO.Rit;
+using NuGet.Configuration;
 
 namespace Covauto.API;
 
@@ -18,17 +19,28 @@ public class Program
 
         // Add services to the container.
         ServicesConfiguration.RegisterServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
-        
-        builder.Services.AddScoped<AbstractRepository<AdresListItem, AdresItem>, AdresRepository>();
-        builder.Services.AddScoped<AbstractService<AutoListItem, AutoItem>, BaseService<AutoListItem, AutoItem>>();
-        builder.Services.AddScoped<AbstractService<GebruikerListItem, GebruikerItem>, BaseService<GebruikerListItem, GebruikerItem>>();
-        builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem>, BaseService<ReserveringListItem, ReserveringItem>>();
-        builder.Services.AddScoped<AbstractService<RitListItem, RitItem>, BaseService<RitListItem, RitItem>>();
-        
-        builder.Services.AddScoped<AbstractRepository<AutoListItem, AutoItem>, AutoRepository>();
-        builder.Services.AddScoped<AbstractRepository<GebruikerListItem, GebruikerItem>, GebruikerRepository>();
-        builder.Services.AddScoped<AbstractRepository<ReserveringListItem, ReserveringItem>, ReserveringRepository>();
-        builder.Services.AddScoped<AbstractRepository<RitListItem, RitItem>, RitRepository>();
+
+        var _ = typeof(object);
+        var mappings = new List<(Type listType, Type itemType, Type addType, Type updateType, Type repositoryType)>
+        {
+            (_, _, typeof(AdresMakeItem), _, typeof(AdresRepository)),
+            (typeof(AutoListItem), typeof(AutoItem), _, _, typeof(AutoRepository)),
+            (typeof(GebruikerListItem), typeof(GebruikerItem), _, _, typeof(GebruikerRepository)),
+            (typeof(RitListItem), typeof(RitItem), typeof(RitMaakItem), _, typeof(RitRepository))
+        };
+
+        foreach (var (listType, itemType, addType, updateType, repositoryType) in mappings)
+        {
+            var baseService = typeof(AbstractService<,,,>).MakeGenericType(listType, itemType, addType, updateType);
+            var serviceType = typeof(BaseService<,,,>).MakeGenericType(listType, itemType, addType, updateType);
+            builder.Services.AddScoped(baseService, serviceType);
+            
+            var baseRepository = typeof(AbstractRepository<,,,>).MakeGenericType(listType, itemType, addType, updateType);
+            builder.Services.AddScoped(baseRepository, repositoryType);
+        }
+
+        builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object>, ReserveringService<ReserveringItem, object>>();
+        builder.Services.AddScoped<AbstractRepository<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object>, ReserveringRepository>();
         
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

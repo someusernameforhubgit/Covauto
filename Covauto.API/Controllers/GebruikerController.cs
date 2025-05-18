@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Covauto.API.Controllers;
 
-public class GebruikerController(AbstractService<GebruikerListItem, GebruikerItem> service)
-    : AbstractController<GebruikerListItem, GebruikerItem>(service)
+public class GebruikerController(AbstractService<GebruikerListItem, GebruikerItem, object, object> service)
+    : AbstractController<GebruikerListItem, GebruikerItem, object, object>(service)
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GebruikerListItem>>> Get()

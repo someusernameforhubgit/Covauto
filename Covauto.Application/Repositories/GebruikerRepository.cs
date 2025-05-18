@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class GebruikerRepository(CovautoContext ctx): AbstractRepository<GebruikerListItem, GebruikerItem>(ctx)
+public class GebruikerRepository(CovautoContext ctx): AbstractRepository<GebruikerListItem, GebruikerItem, object, object>(ctx)
 {
     public override async Task<IEnumerable<GebruikerListItem>> GetAllAsync()
     {

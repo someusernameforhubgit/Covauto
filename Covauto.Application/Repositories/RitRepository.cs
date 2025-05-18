@@ -1,5 +1,6 @@
 using Covauto.Application.Interfaces;
 using Covauto.Domain.Data;
+using Covauto.Domain.Entities;
 using Covauto.Shared.DTO.Adres;
 using Covauto.Shared.DTO.Gebruiker;
 using Covauto.Shared.DTO.Rit;
@@ -7,21 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Covauto.Application.Repositories;
 
-public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, RitItem>(ctx)
+public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, RitItem, RitMaakItem, object>(ctx)
 {
     public override async Task<IEnumerable<RitListItem>> GetAllAsync()
     {
         return await Ctx.Ritten.Select(item => new RitListItem
         {
             ID = item.ID,
-            Datum = item.Datum,
-            Gebruiker = new GebruikerListItem
-            {
-                ID = item.GebruikerID,
-                Achternaam = item.Gebruiker.Achternaam,
-                Voornaam = item.Gebruiker.Voornaam,
-            },
-            Kilometers = item.Kilometers,
+            GebruikerId = item.GebruikerID,
+            Datum = item.Datum
         }).ToListAsync();
     }
 
@@ -34,12 +29,14 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
         {
             ID = rit.ID,
             Datum = rit.Datum,
+            GebruikerId = rit.GebruikerID,
             Gebruiker = new GebruikerListItem
             {
                 ID = rit.GebruikerID,
                 Achternaam = rit.Gebruiker.Achternaam,
                 Voornaam = rit.Gebruiker.Voornaam,
             },
+            AutoId = rit.AutoID,
             Kilometers = rit.Kilometers,
             Adressen = []
         };
@@ -58,5 +55,27 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
         }
         returnRit.Adressen = returnRit.Adressen.OrderBy(ad => ad.Order).ToList();
         return returnRit;
+    }
+
+    public override async Task<int> AddAsync(RitMaakItem item)
+    {
+        var gebruiker = await Ctx.Ritten.Include(r => r.Gebruiker)
+            .FirstOrDefaultAsync(r => r.Gebruiker != null && r.Gebruiker.ID == item.GebruikerId);
+        if (gebruiker == null) throw new KeyNotFoundException("Geen Gebruiker met dat ID gevonden");
+        var auto = await Ctx.Ritten.Include(r => r.Auto)
+            .FirstOrDefaultAsync(r => r.Auto != null && r.Auto.ID == item.AutoId);
+        if (auto == null) throw new KeyNotFoundException("Geen Auto met dat ID gevonden");
+        var rit = new Rit
+        {
+            GebruikerID = item.GebruikerId,
+            AutoID = item.AutoId,
+            Datum = item.Datum,
+            Kilometers = item.Kilometers
+        };
+
+        await Ctx.Ritten.AddAsync(rit);
+        await Ctx.SaveChangesAsync();
+        
+        return rit.ID;
     }
 }

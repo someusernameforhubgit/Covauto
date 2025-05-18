@@ -2,18 +2,31 @@ using Covauto.Domain.Data;
 
 namespace Covauto.Application.Interfaces;
 
-public abstract class AbstractRepository<TListItem, TItem>(CovautoContext context)
+public abstract class AbstractRepository<TListItem, TItem, TMakeItem, TUpdateItem>(CovautoContext context)
 {
     protected readonly CovautoContext Ctx = context;
-    public abstract Task<IEnumerable<TListItem>> GetAllAsync();
-    public abstract Task<TItem> GetByIDAsync(int id);
+
+    public virtual Task<IEnumerable<TListItem>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual Task<TItem> GetByIDAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
 
     public virtual Task<IEnumerable<TListItem>> SearchAsync(string query)
     {
         throw new NotImplementedException();
     }
     
-    public virtual Task<int> AddAsync(TItem item)
+    public virtual Task<int> AddAsync(TMakeItem item)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public virtual Task<int> UpdateAsync(int id, TUpdateItem item)
     {
         throw new NotImplementedException();
     }

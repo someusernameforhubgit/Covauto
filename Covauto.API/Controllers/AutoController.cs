@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Covauto.API.Controllers;
 
-public class AutoController(AbstractService<AutoListItem, AutoItem> service)
-    : AbstractController<AutoListItem, AutoItem>(service)
+public class AutoController(AbstractService<AutoListItem, AutoItem, object, object> service)
+    : AbstractController<AutoListItem, AutoItem, object, object>(service)
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<AutoListItem>>> Get()
