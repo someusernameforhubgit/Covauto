@@ -39,8 +39,8 @@ public class Program
             builder.Services.AddScoped(baseRepository, repositoryType);
         }
 
-        builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object>, ReserveringService<ReserveringItem, object>>();
-        builder.Services.AddScoped<AbstractRepository<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object>, ReserveringRepository>();
+        builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem>, ReserveringService<ReserveringItem>>();
+        builder.Services.AddScoped<AbstractRepository<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem>, ReserveringRepository>();
         
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
