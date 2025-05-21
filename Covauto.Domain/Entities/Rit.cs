@@ -9,5 +9,6 @@ public class Rit
     public ICollection<Adres>? Adressen { get; set; }
     public virtual Auto? Auto { get; set; }
     public int AutoID { get; set; }
-    public DateTime Datum { get; set; }
+    public DateTime Begin { get; set; }
+    public DateTime End { get; set; }
 }
