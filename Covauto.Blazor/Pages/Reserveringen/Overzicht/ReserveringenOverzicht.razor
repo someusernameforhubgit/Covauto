@@ -1,0 +1,27 @@
+@page "/reserveringen"
+
+<h1>Reserveringen overzicht</h1>
+<p>Hieronder vind je een overzicht van alle reserveringen in de database</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var reservering in reserveringen)
+    {
+        @* <tr @onclick="@(_ => BoekBewerken(boek.ID))"> *@
+        <tr>
+            <td>@reservering.ID</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* <button @onclick="BoekAanmaken">Boek aanmaken</button> *@
+
+@code {
+    
+}
