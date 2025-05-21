@@ -35,7 +35,8 @@ public class CovautoContext(DbContextOptions<CovautoContext> options) : DbContex
             AutoID = 1,
             GebruikerID = 1,
             Kilometers = 1000,
-            Datum = new DateTime(2025, 12, 5, 12, 00, 00),
+            Begin = new DateTime(2025, 12, 5, 12, 00, 00),
+            End = new DateTime(2025, 12, 5, 14, 00, 00),
         });
         modelBuilder.Entity<Adres>().HasData(new Adres
         {

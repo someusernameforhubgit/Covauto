@@ -42,11 +42,12 @@ public class AutoRepository(CovautoContext ctx) : AbstractRepository<AutoListIte
             {
                 ID = rit.ID,
                 GebruikerId = rit.GebruikerID,
-                Datum = rit.Datum
+                Begin = rit.Begin,
+                End = rit.End
             };
             returnAuto.Ritten.Add(newRit);
         }
-        returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Datum).ToList();
+        returnAuto.Ritten = returnAuto.Ritten.OrderByDescending(n => n.Begin).ToList();
         return returnAuto;
     }
 }

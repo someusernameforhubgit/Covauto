@@ -16,7 +16,8 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
         {
             ID = item.ID,
             GebruikerId = item.GebruikerID,
-            Datum = item.Datum
+            Begin = item.Begin,
+            End = item.End
         }).ToListAsync();
     }
 
@@ -28,7 +29,8 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
         var returnRit = new RitItem
         {
             ID = rit.ID,
-            Datum = rit.Datum,
+            Begin = rit.Begin,
+            End = rit.End,
             GebruikerId = rit.GebruikerID,
             Gebruiker = new GebruikerListItem
             {
@@ -69,7 +71,8 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
         {
             GebruikerID = item.GebruikerId,
             AutoID = item.AutoId,
-            Datum = item.Datum,
+            Begin = item.Begin,
+            End = item.End,
             Kilometers = item.Kilometers
         };
 
