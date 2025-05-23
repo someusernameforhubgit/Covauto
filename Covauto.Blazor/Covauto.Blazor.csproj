@@ -21,4 +21,8 @@
       <ProjectReference Include="..\Covauto.Shared\Covauto.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+    </ItemGroup>
+
 </Project>
