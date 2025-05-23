@@ -1,0 +1,35 @@
+@page "/ritten/aanmaken"
+
+<h1>Maak een rit aan</h1>
+
+<EditForm Model="rit" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="gebruikerId">Gebruiker ID:</label>
+        <input type="number" id="gebruikerId" @bind="rit.GebruikerId" required />
+    </div>
+
+    <div>
+        <label for="autoId">Auto ID:</label>
+        <input type="number" id="autoId" @bind="rit.AutoId" required />
+    </div>
+
+    <div>
+        <label for="begin">Begin datum/tijd:</label>
+        <input type="datetime-local" id="begin" @bind="rit.Begin" required />
+    </div>
+
+    <div>
+        <label for="end">Eind datum/tijd:</label>
+        <input type="datetime-local" id="end" @bind="rit.End" required />
+    </div>
+
+    <div>
+        <label for="kilometers">Aantal kilometers:</label>
+        <input type="number" id="kilometers" @bind="rit.Kilometers" required />
+    </div>
+
+    <button type="submit">Rit aanmaken</button>
+</EditForm>
