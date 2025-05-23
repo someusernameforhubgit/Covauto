@@ -1,6 +1,20 @@
 @page "/ritten"
-<h3>RittenOverzicht</h3>
 
-@code {
-    
-}
+<h1>Ritten overzicht</h1>
+<p>Hieronder vind je een overzicht van alle ritten in de database</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var rit in ritten)
+    {
+        <tr>
+            <td>@rit.ID</td>
+        </tr>
+    }
+    </tbody>
+</table>
