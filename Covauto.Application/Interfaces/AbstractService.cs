@@ -23,7 +23,7 @@ public abstract class AbstractService<TListItem, TItem, TMakeItem, TUpdateItem>(
         return await Repository.AddAsync(item);
     }
     
-    public virtual Task<int> UpdateAsync(int id, TUpdateItem item)
+    public virtual Task UpdateAsync(int id, TUpdateItem item)
     {
         throw new NotImplementedException();
     }

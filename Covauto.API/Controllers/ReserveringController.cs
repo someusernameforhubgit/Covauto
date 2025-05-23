@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Covauto.API.Controllers;
 
-public class ReserveringController(AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object> service)
-    : AbstractController<ReserveringListItem, ReserveringItem, ReserveringMaakItem, object>(service)
+public class ReserveringController(AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem> service)
+    : AbstractController<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem>(service)
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ReserveringListItem>>> Get()
@@ -24,6 +24,12 @@ public class ReserveringController(AbstractService<ReserveringListItem, Reserver
     public async Task<ActionResult<int>> Post(ReserveringMaakItem item)
     {
         return await _add(item);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Put(int id, ReserveringUpdateItem item)
+    {
+        return await _update(id, item);
     }
 
     [HttpDelete("{id}")]
