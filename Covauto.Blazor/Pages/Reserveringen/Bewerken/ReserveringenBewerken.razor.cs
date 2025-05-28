@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text.Json;
 using Covauto.Shared.DTO.Auto;
 using Covauto.Shared.DTO.Reservering;
 using Microsoft.AspNetCore.Components;
@@ -20,6 +21,7 @@ public partial class ReserveringenBewerken : ComponentBase
     private List<AutoListItem> autos = new();
     private DateTime beginDatum = DateTime.Today;
     private DateTime eindDatum = DateTime.Today;
+    private string? errorMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,6 +35,7 @@ public partial class ReserveringenBewerken : ComponentBase
                 reservering = new ReserveringUpdateItem
                 {
                     ID = result.ID,
+                    GebruikerID = result.Gebruiker.ID,
                     AutoID = result.AutoID,
                     Begin = result.Begin,
                     End = result.End
@@ -56,6 +59,20 @@ public partial class ReserveringenBewerken : ComponentBase
         {
             NavigationManager.NavigateTo("/reserveringen");
         }
+        else
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            try 
+            {
+                var errorJson = JsonDocument.Parse(errorContent);
+                errorMessage = "Error: " + errorJson.RootElement.GetProperty("title").GetString();
+            }
+            catch (JsonException)
+            {
+                errorMessage = "Error: " + errorContent;
+            }
+        }
+            
     }
 
     private async Task Delete()

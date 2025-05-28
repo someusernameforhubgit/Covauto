@@ -32,10 +32,11 @@
             <label for="eindDatum">Einddatum:</label>
             <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@eindDatum" class="form-control" />
             <ValidationMessage For="@(() => reservering.End)" />
-        </div>
+        </div><br/>
 
         <button type="submit" class="btn btn-primary">Opslaan</button>
         <button type="button" class="btn btn-danger" @onclick="Delete">Verwijderen</button>
         <button type="button" class="btn btn-secondary" @onclick="Cancel">Annuleren</button>
-    </EditForm>
+    </EditForm><br/>
+    <p class="text-danger">@errorMessage</p>
 }
