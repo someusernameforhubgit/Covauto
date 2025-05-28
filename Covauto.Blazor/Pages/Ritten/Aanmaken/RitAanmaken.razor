@@ -30,6 +30,32 @@
         <label for="kilometers">Aantal kilometers:</label>
         <input type="number" id="kilometers" @bind="rit.Kilometers" required />
     </div>
+    
+    <div>
+        <label>Adressen:</label>
+            
+        @for (int i = 0; i < rit.Adressen.Count; i++)
+        {
+            <div class="adres-blok" style="margin-bottom: 10px; border: 1px solid #ccc; padding: 10px;">
+                <label>Straat:</label>
+                <input type="text" @bind="rit.Adressen[i].Straat" />
+
+                <label>Huisnummer:</label>
+                <input type="text" @bind="rit.Adressen[i].Huisnummer" />
+
+                <label>Plaats:</label>
+                <input type="text" @bind="rit.Adressen[i].Plaats" />
+
+                <label>Land:</label>
+                <input type="text" @bind="rit.Adressen[i].Land" />
+
+                <label>Volgorde (Order):</label>
+                <input type="number" @bind="rit.Adressen[i].Order" />
+            </div>
+        }
+
+        <button type="button" @onclick="AddAdres">+ Voeg adres toe</button>
+    </div>
 
     <button type="submit">Rit aanmaken</button>
 </EditForm>

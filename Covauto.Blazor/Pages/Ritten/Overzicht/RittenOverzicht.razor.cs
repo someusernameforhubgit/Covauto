@@ -23,4 +23,9 @@ public partial class RittenOverzicht : ComponentBase
     {
         NavigationManager.NavigateTo("ritten/aanmaken");
     }
+    
+    private void RitBekijken(int id)
+    {
+        NavigationManager.NavigateTo($"ritten/bekijken/{id}");
+    }
 }

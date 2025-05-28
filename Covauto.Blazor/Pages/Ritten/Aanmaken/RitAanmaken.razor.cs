@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Covauto.Shared.DTO.Rit;
+using Covauto.Shared.DTO.Adres;
 using System.Net.Http.Json;
 
 namespace Covauto.Blazor.Pages.Ritten.Aanmaken;
@@ -27,5 +28,10 @@ public partial class RitAanmaken : ComponentBase
             Console.WriteLine("Failed to create rit: " + result.StatusCode);
             // Foutmelding tonen
         }
+    }
+    
+    private void AddAdres()
+    {
+        rit.Adressen.Add(new AdresMaakItem());
     }
 }
