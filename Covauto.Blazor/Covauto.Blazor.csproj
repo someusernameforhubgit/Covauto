@@ -14,7 +14,6 @@
 
     <ItemGroup>
       <Folder Include="Pages\Reserveringen\Aanmaken\" />
-      <Folder Include="Pages\Reserveringen\Bewerken\" />
     </ItemGroup>
 
     <ItemGroup>

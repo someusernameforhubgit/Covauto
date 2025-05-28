@@ -7,20 +7,25 @@
     <thead>
     <tr>
         <th>ID</th>
+        <th>Auto</th>
+        <th>Begin</th>
+        <th>Einde</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var reservering in reserveringen)
     {
-        @* <tr @onclick="@(_ => BoekBewerken(boek.ID))"> *@
-        <tr>
+        <tr @onclick="@(_ => ReserveringBewerken(reservering.ID))">
             <td>@reservering.ID</td>
+            <td>@reservering.AutoID</td>
+            <td>@reservering.Begin</td>
+            <td>@reservering.End</td>
         </tr>
     }
     </tbody>
 </table>
 
-@* <button @onclick="BoekAanmaken">Boek aanmaken</button> *@
+<button @onclick="ReserveringAanmaken">Reservering aanmaken</button>
 
 @code {
     

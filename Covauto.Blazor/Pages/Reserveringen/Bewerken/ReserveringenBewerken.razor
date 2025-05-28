@@ -1,0 +1,42 @@
+@page "/reserveringen/bewerken/{Id:int}"
+
+<h1>Reservering bewerken</h1>
+
+@if (reservering != null)
+{
+    <EditForm Model="@reservering" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="auto">Auto:</label>
+            <InputSelect id="auto" @bind-Value="reservering.AutoID" class="form-control">
+                <option value="">Selecteer een auto</option>
+                @if (autos != null)
+                {
+                    @foreach (var auto in autos)
+                    {
+                        <option value="@auto.ID">@auto.Merk @auto.Model</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => reservering.AutoID)" />
+        </div>
+
+        <div class="form-group">
+            <label for="beginDatum">Begindatum:</label>
+            <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@beginDatum" class="form-control" />
+            <ValidationMessage For="@(() => reservering.Begin)" />
+        </div>
+
+        <div class="form-group">
+            <label for="eindDatum">Einddatum:</label>
+            <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@eindDatum" class="form-control" />
+            <ValidationMessage For="@(() => reservering.End)" />
+        </div><br/>
+
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+        <button type="button" class="btn btn-danger" @onclick="Delete">Verwijderen</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Annuleren</button>
+    </EditForm><br/>
+    <p class="text-danger">@errorMessage</p>
+}
