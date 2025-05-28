@@ -41,8 +41,8 @@ public partial class ReserveringenBewerken : ComponentBase
                     End = result.End
                 };
                 
-                beginDatum = reservering.Begin.HasValue ? reservering.Begin.Value.Date : DateTime.Today;
-                eindDatum = reservering.End.HasValue ? reservering.End.Value.Date : DateTime.Today;
+                beginDatum = reservering.Begin ?? DateTime.Today;
+                eindDatum = reservering.End ?? DateTime.Today;
             }
         }
     }
