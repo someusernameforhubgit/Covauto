@@ -6,14 +6,28 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <div>
-        <label for="gebruikerId">Gebruiker ID:</label>
-        <input type="number" id="gebruikerId" @bind="rit.GebruikerId" required />
+    <div class="form-group">
+        <label for="gebruiker">Gebruiker:</label>
+        <InputSelect @bind-Value="rit.GebruikerId" id="gebruiker" class="form-control">
+            <option value="0">-- Selecteer een gebruiker --</option>
+            @foreach (var gebruiker in gebruikers)
+            {
+                <option value="@gebruiker.ID">@gebruiker.Voornaam @gebruiker.Achternaam</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => rit.GebruikerId)" />
     </div>
 
-    <div>
-        <label for="autoId">Auto ID:</label>
-        <input type="number" id="autoId" @bind="rit.AutoId" required />
+    <div class="form-group">
+        <label for="auto">Auto:</label>
+        <InputSelect @bind-Value="rit.AutoId" id="auto" class="form-control">
+            <option value="0">-- Selecteer een auto --</option>
+            @foreach (var auto in autos)
+            {
+                <option value="@auto.ID">@auto.Merk @auto.Model</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => rit.AutoId)" />
     </div>
 
     <div>

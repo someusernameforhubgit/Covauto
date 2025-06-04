@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Covauto.Shared.DTO.Rit;
 using Covauto.Shared.DTO.Adres;
 using System.Net.Http.Json;
+using Covauto.Shared.DTO.Auto;
+using Covauto.Shared.DTO.Gebruiker;
 
 namespace Covauto.Blazor.Pages.Ritten.Aanmaken;
 
@@ -14,6 +16,14 @@ public partial class RitAanmaken : ComponentBase
     private NavigationManager NavigationManager { get; set; }
 
     private RitMaakItem rit = new RitMaakItem();
+    private List<AutoListItem> autos = new();
+    private List<GebruikerListItem> gebruikers = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        autos = await HttpClient.GetFromJsonAsync<List<AutoListItem>>("/api/Auto");
+        gebruikers = await HttpClient.GetFromJsonAsync<List<GebruikerListItem>>("/api/Gebruiker");
+    }
 
     private async Task Submit()
     {
