@@ -9,13 +9,42 @@
         <tr>
             <th>ID</th>
             <th>Auto ID</th>
+            <th>Kilometers</th>
+            <th>Gebruiker ID</th>
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <td>@rit.ID</td>
+            <td>@rit.AutoId</td>
+            <td>@rit.Kilometers</td>
+            <td>@rit.GebruikerId</td>
+        </tr>
+        </tbody>
+    </table>
+    
+    <h2>Adressen</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Straat</th>
+            <th>Huisnummer</th>
+            <th>Plaats</th>
+            <th>Land</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var adres in rit.Adressen)
+        {
             <tr>
-                <td>@rit.ID</td>
-                <td>@rit.AutoId</td>
+                <td>@adres.ID</td>
+                <td>@adres.Straat</td>
+                <td>@adres.Huisnummer</td>
+                <td>@adres.Plaats</td>
+                <td>@adres.Land</td>
             </tr>
+        }
         </tbody>
     </table>
     @* <label for="Titel">Titel: </label><input type="text" id="titel" @bind="boek.Titel" placeholder="Titel van het boek" required /> *@

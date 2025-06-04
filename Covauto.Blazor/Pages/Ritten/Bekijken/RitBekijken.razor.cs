@@ -1,6 +1,7 @@
 using Covauto.Shared.DTO.Rit;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
+using Covauto.Shared.DTO.Adres;
 
 namespace Covauto.Blazor.Pages.Ritten.Bekijken;
 
@@ -16,6 +17,7 @@ public partial class RitBekijken : ComponentBase
     private NavigationManager NavigationManager { get; set; }
 
     private RitItem rit;
+    private IEnumerable<AdresListItem> adressen = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -25,6 +27,9 @@ public partial class RitBekijken : ComponentBase
         {
             ID = result.ID,
             AutoId = result.AutoId,
+            Kilometers = result.Kilometers,
+            GebruikerId = result.GebruikerId,
+            Adressen = result.Adressen,
         };
     }
     
