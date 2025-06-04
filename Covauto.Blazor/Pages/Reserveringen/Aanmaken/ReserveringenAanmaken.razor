@@ -1,0 +1,50 @@
+@page "/reserveringen/aanmaken"
+
+<h1>Nieuwe Reservering</h1>
+
+<EditForm Model="@reservering" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="gebruiker">Gebruiker:</label>
+        <InputSelect @bind-Value="reservering.GebruikerID" id="gebruiker" class="form-control">
+            <option value="0">-- Selecteer een gebruiker --</option>
+            @foreach (var gebruiker in gebruikers)
+            {
+                <option value="@gebruiker.ID">@gebruiker.Voornaam @gebruiker.Achternaam</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => reservering.GebruikerID)" />
+    </div>
+
+    <div class="form-group">
+        <label for="auto">Auto:</label>
+        <InputSelect @bind-Value="reservering.AutoID" id="auto" class="form-control">
+            <option value="0">-- Selecteer een auto --</option>
+            @foreach (var auto in autos)
+            {
+                <option value="@auto.ID">@auto.Merk @auto.Model</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => reservering.AutoID)" />
+    </div>
+
+    <div class="form-group">
+        <label for="beginDatum">Begindatum:</label>
+        <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@beginDatum" class="form-control" />
+        <ValidationMessage For="@(() => reservering.Begin)" />
+    </div>
+
+    <div class="form-group">
+        <label for="eindDatum">Einddatum:</label>
+        <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@eindDatum" class="form-control" />
+        <ValidationMessage For="@(() => reservering.End)" />
+    </div><br/>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Reservering aanmaken</button>
+        <button type="button" class="btn btn-secondary ms-2" @onclick="Annuleren">Annuleren</button>
+    </div>
+</EditForm><br/>
+<p class="text-danger">@errorMessage</p>

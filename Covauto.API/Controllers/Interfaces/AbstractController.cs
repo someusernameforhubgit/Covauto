@@ -78,6 +78,10 @@ namespace Covauto.API.Controllers.Interfaces
                 await service.UpdateAsync(id, item);
                 return Ok();
             }
+            catch (ValidationException e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
             catch (KeyNotFoundException e)
             {
                 return StatusCode(StatusCodes.Status404NotFound, e.Message);

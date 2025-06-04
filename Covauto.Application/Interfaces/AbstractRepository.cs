@@ -26,7 +26,7 @@ public abstract class AbstractRepository<TListItem, TItem, TMakeItem, TUpdateIte
         throw new NotImplementedException();
     }
     
-    public virtual Task<int> UpdateAsync(int id, TUpdateItem item)
+    public virtual Task UpdateAsync(int id, TUpdateItem item)
     {
         throw new NotImplementedException();
     }
