@@ -21,7 +21,7 @@ public class ReserveringService<TItem>(AbstractRepository<ReserveringListItem, T
         if (id != item.ID) throw new ValidationException("IDs zijn niet gelijk");
 
         var reservering = await Repository.GetByIDAsync(id);
-        var auto = (reservering as Reservering).AutoID;
+        var auto = (reservering as ReserveringItem).AutoID;
         if (item.AutoID.HasValue) auto = item.AutoID.Value;
         if (!item.Begin.HasValue && !item.End.HasValue)
         {

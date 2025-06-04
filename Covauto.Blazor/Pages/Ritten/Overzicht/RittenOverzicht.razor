@@ -1,0 +1,29 @@
+@page "/ritten"
+@using Covauto.Blazor.Pages.Ritten.Bekijken
+
+<h1>Ritten overzicht</h1>
+<p>Hieronder vind je een overzicht van alle ritten in de database</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>GebruikerID</th>
+        <th>Begin Tijd</th>
+        <th>Eind Tijd</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var rit in ritten)
+    {
+        <tr @onclick="@(_ => RitBekijken(rit.ID))">
+            <td>@rit.ID</td>
+            <td>@rit.GebruikerId</td>
+            <td>@rit.Begin</td>
+            <td>@rit.End</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<button @onclick="RitAanmaken">Rit aanmaken</button>

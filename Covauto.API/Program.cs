@@ -42,6 +42,16 @@ public class Program
         builder.Services.AddScoped<AbstractService<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem>, ReserveringService<ReserveringItem>>();
         builder.Services.AddScoped<AbstractRepository<ReserveringListItem, ReserveringItem, ReserveringMaakItem, ReserveringUpdateItem>, ReserveringRepository>();
         
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowBlazorApp",
+                builder => builder
+                    .WithOrigins("https://localhost:7034")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+        });
+
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -57,6 +67,8 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        
+        app.UseCors("AllowBlazorApp");
 
         app.UseAuthorization();
 
