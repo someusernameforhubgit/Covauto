@@ -18,4 +18,14 @@ public partial class RittenOverzicht : ComponentBase
     {
         ritten = await HttpClient.GetFromJsonAsync<IEnumerable<RitListItem>>("api/Rit");
     }
+    
+    private void RitAanmaken()
+    {
+        NavigationManager.NavigateTo("ritten/aanmaken");
+    }
+    
+    private void RitBekijken(int id)
+    {
+        NavigationManager.NavigateTo($"ritten/bekijken/{id}");
+    }
 }
