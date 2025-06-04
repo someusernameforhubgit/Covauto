@@ -24,8 +24,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
     </ItemGroup>
 
-    <ItemGroup>
-      <AdditionalFiles Include="Pages\Ritten\Bekijken\RittenOverzicht.razor" />
-    </ItemGroup>
-
 </Project>
