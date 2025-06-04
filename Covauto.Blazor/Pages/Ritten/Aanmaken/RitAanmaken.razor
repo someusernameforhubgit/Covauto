@@ -34,23 +34,20 @@
     <div>
         <label>Adressen:</label>
             
-        @for (int i = 0; i < rit.Adressen.Count; i++)
+        @foreach(var adres in rit.Adressen)
         {
             <div class="adres-blok" style="margin-bottom: 10px; border: 1px solid #ccc; padding: 10px;">
                 <label>Straat:</label>
-                <input type="text" @bind="rit.Adressen[i].Straat" />
+                <input type="text" @bind="adres.Straat" />
 
                 <label>Huisnummer:</label>
-                <input type="text" @bind="rit.Adressen[i].Huisnummer" />
+                <input type="text" @bind="adres.Huisnummer" />
 
                 <label>Plaats:</label>
-                <input type="text" @bind="rit.Adressen[i].Plaats" />
+                <input type="text" @bind="adres.Plaats" />
 
                 <label>Land:</label>
-                <input type="text" @bind="rit.Adressen[i].Land" />
-
-                <label>Volgorde (Order):</label>
-                <input type="number" @bind="rit.Adressen[i].Order" />
+                <input type="text" @bind="adres.Land" />
             </div>
         }
 

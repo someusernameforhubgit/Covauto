@@ -28,6 +28,21 @@ public partial class RitAanmaken : ComponentBase
             Console.WriteLine("Failed to create rit: " + result.StatusCode);
             // Foutmelding tonen
         }
+        
+        var index = 0;
+        foreach (var adres in rit.Adressen)
+        {
+            adres.RitID = int.Parse(await result.Content.ReadAsStringAsync());
+            adres.Order = index;
+            Console.WriteLine(adres);
+            var adresResult = await HttpClient.PostAsJsonAsync<AdresMaakItem>("/api/Adres", adres);
+            if (!adresResult.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Failed to create adres: " + adresResult.StatusCode);
+            }
+
+            index++;
+        }
     }
     
     private void AddAdres()
