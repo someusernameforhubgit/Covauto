@@ -1,17 +1,23 @@
-﻿namespace CovAuto.GTK;
+using System;
+using Gtk;
 
-class Program
+namespace Covauto.GTK
 {
-    static void Main(string[] args)
+    class Program
     {
-        var application = Gtk.Application.New("org.gir.core", Gio.ApplicationFlags.FlagsNone);
-        application.OnActivate += (sender, args) =>
+        [STAThread]
+        public static void Main(string[] args)
         {
-            var window = Gtk.ApplicationWindow.New((Gtk.Application) sender);
-            window.Title = "Gtk4 Window";
-            window.SetDefaultSize(300, 300);
-            window.Show();
-        };
-        application.RunWithSynchronizationContext(null);
+            Application.Init();
+
+            var app = new Application("org.ABC.ABC", GLib.ApplicationFlags.None);
+            app.Register(GLib.Cancellable.Current);
+
+            var win = new MainWindow();
+            app.AddWindow(win);
+
+            win.Show();
+            Application.Run();
+        }
     }
 }
