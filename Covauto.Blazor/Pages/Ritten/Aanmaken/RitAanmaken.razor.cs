@@ -15,7 +15,11 @@ public partial class RitAanmaken : ComponentBase
     [Inject]
     private NavigationManager NavigationManager { get; set; }
 
-    private RitMaakItem rit = new RitMaakItem();
+    private RitMaakItem rit = new RitMaakItem
+    {
+        Begin= DateTime.Now,
+        End = DateTime.Now
+    };
     private List<AutoListItem> autos = new();
     private List<GebruikerListItem> gebruikers = new();
     
@@ -58,5 +62,10 @@ public partial class RitAanmaken : ComponentBase
     private void AddAdres()
     {
         rit.Adressen.Add(new AdresMaakItem());
+    }
+    
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/ritten");
     }
 }

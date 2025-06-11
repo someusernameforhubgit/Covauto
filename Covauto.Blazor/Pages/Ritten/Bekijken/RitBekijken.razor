@@ -47,23 +47,6 @@
         }
         </tbody>
     </table>
-    @* <label for="Titel">Titel: </label><input type="text" id="titel" @bind="boek.Titel" placeholder="Titel van het boek" required /> *@
-    @* <br /> *@
-    @* <label for="Schrijver">Schrijver: </label> *@
-    @* <select id="schrijver" name="schrijver" @bind="boek.SchrijverId"> *@
-    @*     @foreach (var schrijver in schrijvers) *@
-    @*     { *@
-    @*         <option value="@schrijver.Id">@schrijver.Naam</option> *@
-    @*     } *@
-    @* </select> *@
-    @* <br /> *@
-    @* <label for="Publicatiejaar">Publicatiejaar: </label><input type="number" id="publicatiejaar" @bind="boek.Publicatiejaar" placeholder="Publicatiejaar" required /> *@
-    @* <br /> *@
-    @* <label for="AantalBladzijden">Aantal bladzijden: </label><input type="number" id="aantalbladzijden" @bind="boek.AantalBladzijden" placeholder="Aantal bladzijden" required /> *@
-    @* <br /> *@
-    @* <button type="submit">Opslaan</button> *@
-
-    @* <button class="mt-3" @onclick="Delete">Verwijderen</button> *@
 }
 <br />
-<button class="mt-3" @onclick="Cancel">Terug naar overzicht</button>
+<button type="submit" class="mt-3 btn btn-secondary" @onclick="Cancel">Terug naar overzicht</button>

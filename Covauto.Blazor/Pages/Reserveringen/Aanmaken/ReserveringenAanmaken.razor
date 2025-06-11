@@ -1,5 +1,15 @@
 @page "/reserveringen/aanmaken"
 
+<style>
+    input {
+        cursor: text;
+    }
+    
+    select {
+        cursor: pointer;
+    }
+</style>
+
 <h1>Nieuwe Reservering</h1>
 
 <EditForm Model="@reservering" OnValidSubmit="Submit">
@@ -16,7 +26,7 @@
             }
         </InputSelect>
         <ValidationMessage For="@(() => reservering.GebruikerID)" />
-    </div>
+    </div><br/>
 
     <div class="form-group">
         <label for="auto">Auto:</label>
@@ -28,13 +38,13 @@
             }
         </InputSelect>
         <ValidationMessage For="@(() => reservering.AutoID)" />
-    </div>
+    </div><br/>
 
     <div class="form-group">
         <label for="beginDatum">Begindatum:</label>
         <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@beginDatum" class="form-control" />
         <ValidationMessage For="@(() => reservering.Begin)" />
-    </div>
+    </div><br/>
 
     <div class="form-group">
         <label for="eindDatum">Einddatum:</label>

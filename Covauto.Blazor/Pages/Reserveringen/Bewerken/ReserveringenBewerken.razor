@@ -1,5 +1,15 @@
 @page "/reserveringen/bewerken/{Id:int}"
 
+<style>
+    input {
+        cursor: text;
+    }
+
+    select {
+        cursor: pointer;
+    }
+</style>
+
 <h1>Reservering bewerken</h1>
 
 @if (reservering != null)
@@ -20,13 +30,13 @@
                 }
             </InputSelect>
             <ValidationMessage For="@(() => reservering.AutoID)" />
-        </div>
+        </div><br/>
 
         <div class="form-group">
             <label for="beginDatum">Begindatum:</label>
             <InputDate Type="InputDateType.DateTimeLocal" id="beginDatum" @bind-Value="@beginDatum" class="form-control" />
             <ValidationMessage For="@(() => reservering.Begin)" />
-        </div>
+        </div><br/>
 
         <div class="form-group">
             <label for="eindDatum">Einddatum:</label>
