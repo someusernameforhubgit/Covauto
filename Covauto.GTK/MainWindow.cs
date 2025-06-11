@@ -6,6 +6,7 @@ using System.Net.Http.Json;
 using Covauto.Shared.DTO.Auto;
 using Covauto.Shared.DTO.Rit;
 using System.IO;
+using System.Threading.Tasks;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
 using ClosedXML.Excel;
@@ -82,6 +83,19 @@ namespace Covauto.GTK
         
         private async void ShownHandler(object sender, EventArgs e)
         {
+            while (true)
+            {
+                try
+                {
+                    await client.GetAsync("https://localhost:7221/");
+                    break;
+                }
+                catch (Exception)
+                {
+                    await Task.Delay(1000);
+                }
+            }
+            
             var response = await client.GetFromJsonAsync<List<RitListItem>>("https://localhost:7221/api/Rit");
             var treeStore = treeView.Model as TreeStore;
             
