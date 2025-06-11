@@ -202,7 +202,6 @@ namespace Covauto.GTK
                     while (treeStore.IterNext(ref iter));
                 }
                 
-                // Styling
                 var headerRange = worksheet.Range(1, 1, 1, 6);
                 headerRange.Style.Font.Bold = true;
                 headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
