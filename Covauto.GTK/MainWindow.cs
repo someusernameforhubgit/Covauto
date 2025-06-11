@@ -166,7 +166,6 @@ namespace Covauto.GTK
             {
                 var worksheet = workbook.Worksheets.Add("Data");
                 
-                // Hier moet data van de tabel
                 worksheet.Cell(1, 1).Value = "ID";
                 worksheet.Cell(1, 2).Value = "Gebruiker";
                 worksheet.Cell(1, 3).Value = "Kilometers";
@@ -174,12 +173,43 @@ namespace Covauto.GTK
                 worksheet.Cell(1, 5).Value = "Begin Tijd";
                 worksheet.Cell(1, 6).Value = "Eind Tijd";
                 
-                // Styling
+                var treeStore = treeView.Model as TreeStore;
+                TreeIter iter;
+                int row = 2;
+                
+                if (treeStore.GetIterFirst(out iter))
+                {
+                    do
+                    {
+                        // Extract data from each column
+                        var id = (int)treeStore.GetValue(iter, 0);
+                        var gebruiker = (string)treeStore.GetValue(iter, 1);
+                        var auto = (string)treeStore.GetValue(iter, 2);
+                        var kilometers = (int)treeStore.GetValue(iter, 3);
+                        var beginTijd = (string)treeStore.GetValue(iter, 4);
+                        var eindTijd = (string)treeStore.GetValue(iter, 5);
+                        
+                        // Add data to Excel
+                        worksheet.Cell(row, 1).Value = id;
+                        worksheet.Cell(row, 2).Value = gebruiker;
+                        worksheet.Cell(row, 3).Value = kilometers;
+                        worksheet.Cell(row, 4).Value = auto;
+                        worksheet.Cell(row, 5).Value = beginTijd;
+                        worksheet.Cell(row, 6).Value = eindTijd;
+                        
+                        row++;
+                    }
+                    while (treeStore.IterNext(ref iter));
+                }
+                
                 var headerRange = worksheet.Range(1, 1, 1, 6);
                 headerRange.Style.Font.Bold = true;
                 headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
-                worksheet.Columns().Width = 18;
+                
+                worksheet.Columns().Width = 20;
                 worksheet.Columns().Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
+                
+                worksheet.Columns().AdjustToContents();
                 
                 workbook.SaveAs(filePath);
             }
