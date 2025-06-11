@@ -20,4 +20,4 @@ namespace Covauto.GTK
             Application.Run();
         }
     }
-}
+}   
