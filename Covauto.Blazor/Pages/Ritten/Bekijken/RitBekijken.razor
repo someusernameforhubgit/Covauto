@@ -7,16 +7,20 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Gebruiker</th>
             <th>Auto</th>
             <th>Kilometers</th>
-            <th>Gebruiker</th>
+            <th>Begin</th>
+            <th>Eind</th>
         </tr>
         </thead>
         <tbody>
         <tr>
+            <td>@gebruiker.Voornaam @gebruiker.Achternaam</td>
             <td>@auto.Merk @auto.Model</td>
             <td>@rit.Kilometers</td>
-            <td>@gebruiker.Voornaam @gebruiker.Achternaam</td>
+            <td>@rit.Begin</td>
+            <td>@rit.End</td>
         </tr>
         </tbody>
     </table>
