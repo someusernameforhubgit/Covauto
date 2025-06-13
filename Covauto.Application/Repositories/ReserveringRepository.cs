@@ -55,8 +55,7 @@ public class ReserveringRepository(CovautoContext ctx): AbstractRepository<Reser
     {
         var gebruiker = await Ctx.Gebruikers.FirstOrDefaultAsync(g => g.ID == item.GebruikerID);
         if (gebruiker == null) throw new KeyNotFoundException("Geen Gebruiker met dat ID gevonden");
-        var auto = await Ctx.Reserveringen.Include(r => r.Auto)
-            .FirstOrDefaultAsync(r => r.Auto != null && r.Auto.ID == item.AutoID);
+        var auto = await Ctx.Autos.FirstOrDefaultAsync(r => r.ID == item.AutoID);
         if (auto == null) throw new KeyNotFoundException("Geen Auto met dat ID gevonden");
         var reservering = new Reservering
         {
