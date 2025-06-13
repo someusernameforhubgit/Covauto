@@ -34,6 +34,8 @@ public partial class RitBekijken : ComponentBase
             Kilometers = result.Kilometers,
             GebruikerId = result.GebruikerId,
             Adressen = result.Adressen,
+            Begin = result.Begin,
+            End = result.End
         };
         
         auto = await HttpClient.GetFromJsonAsync<AutoItem>($"api/Auto/{rit.AutoId}");
