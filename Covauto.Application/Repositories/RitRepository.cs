@@ -61,11 +61,9 @@ public class RitRepository(CovautoContext ctx): AbstractRepository<RitListItem, 
 
     public override async Task<int> AddAsync(RitMaakItem item)
     {
-        var gebruiker = await Ctx.Ritten.Include(r => r.Gebruiker)
-            .FirstOrDefaultAsync(r => r.Gebruiker != null && r.Gebruiker.ID == item.GebruikerId);
+        var gebruiker = await Ctx.Gebruikers.FirstOrDefaultAsync(r => r.ID == item.GebruikerId);
         if (gebruiker == null) throw new KeyNotFoundException("Geen Gebruiker met dat ID gevonden");
-        var auto = await Ctx.Ritten.Include(r => r.Auto)
-            .FirstOrDefaultAsync(r => r.Auto != null && r.Auto.ID == item.AutoId);
+        var auto = await Ctx.Autos.FirstOrDefaultAsync(r => r.ID == item.AutoId);
         if (auto == null) throw new KeyNotFoundException("Geen Auto met dat ID gevonden");
         var rit = new Rit
         {
