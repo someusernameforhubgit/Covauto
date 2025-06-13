@@ -16,6 +16,7 @@ namespace Covauto.GTK
     class MainWindow : Window
     {
         [UI] private Button Export = null;
+        [UI] private Button Refresh = null;
 
         private static HttpClientHandler handler = new HttpClientHandler
         {
@@ -47,6 +48,7 @@ namespace Covauto.GTK
             DeleteEvent += Window_DeleteEvent;
 
             Export.Clicked += OnExportButtonClicked;
+            Refresh.Clicked += OnRefreshButtonClicked;
         }
         
         private void PrepareTreeView()
@@ -96,8 +98,20 @@ namespace Covauto.GTK
                 }
             }
             
+            RefreshView();
+        }
+
+        private void OnRefreshButtonClicked(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+        private async void RefreshView()
+        {
             var response = await client.GetFromJsonAsync<List<RitListItem>>("https://localhost:7221/api/Rit");
             var treeStore = treeView.Model as TreeStore;
+            
+            treeStore.Clear();
             
             var autoResponse = await client.GetFromJsonAsync<List<AutoListItem>>("https://localhost:7221/api/Auto");
             var autos = autoResponse.ToDictionary(auto => auto.ID, auto => auto);
