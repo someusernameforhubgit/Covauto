@@ -13,7 +13,6 @@
 <table class="table">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Auto</th>
         <th>Begin</th>
         <th>Einde</th>
@@ -23,7 +22,6 @@
     @foreach (var reservering in reserveringen)
     {
         <tr @onclick="@(_ => ReserveringBewerken(reservering.ID))" class="hover">
-            <td>@reservering.ID</td>
             <td>@autos.First(a => a.Key == reservering.AutoID).Value.Merk @autos.First(a => a.Key == reservering.AutoID).Value.Model</td>
             <td>@reservering.Begin</td>
             <td>@reservering.End</td>

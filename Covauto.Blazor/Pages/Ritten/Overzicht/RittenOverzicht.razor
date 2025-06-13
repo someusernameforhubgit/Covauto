@@ -14,8 +14,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>GebruikerID</th>
+        <th>Gebruiker</th>
         <th>Begin Tijd</th>
         <th>Eind Tijd</th>
     </tr>
@@ -24,7 +23,6 @@
     @foreach (var rit in ritten)
     {
         <tr @onclick="@(_ => RitBekijken(rit.ID))" class="hover">
-            <td>@rit.ID</td>
             <td>@gebruikers.First(g => g.Key == rit.GebruikerId).Value.Voornaam @gebruikers.First(g => g.Key == rit.GebruikerId).Value.Achternaam</td>
             <td>@rit.Begin</td>
             <td>@rit.End</td>
